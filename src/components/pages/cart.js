@@ -87,33 +87,33 @@ class Cart extends React.Component{
     }, this)
     return(
       <Panel bsStyle='success'>
-        // <Panel.Heading>
-        //   <Panel.Title componentClass="h3">
-        //     Cart
-        //   </Panel.Title>
-        // </Panel.Heading>
-        // <Panel.Body>
-        {cartItemsList}
-        <Row>
-          <Col xs={12}>
-            <h6>Total amount: {this.props.totalAmount}</h6>
-            <Button onClick={this.open.bind(this)} bsStyle="success" bsSize="small">
-              PROCEED TO CHECKOUT
-            </Button>
-          </Col>
-        </Row>
-        <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h6>total $: {this.props.totalAmount}</h6>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.close.bind(this)}>Close</Button>
-          </Modal.Footer>
-        </Modal>
-        // </Panel.Body>
+        <Panel.Heading>
+          <Panel.Title componentClass="h3">
+            Cart
+          </Panel.Title>
+        </Panel.Heading>
+        <Panel.Body>
+          {cartItemsList}
+          <Row>
+            <Col xs={12}>
+              <h6>Total amount: {this.props.totalAmount}</h6>
+              <Button onClick={this.open.bind(this)} bsStyle="success" bsSize="small">
+                PROCEED TO CHECKOUT
+              </Button>
+            </Col>
+          </Row>
+          <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <h6>total $: {this.props.totalAmount}</h6>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.close.bind(this)}>Close</Button>
+            </Modal.Footer>
+          </Modal>
+        </Panel.Body>
       </Panel>
     )
   }
