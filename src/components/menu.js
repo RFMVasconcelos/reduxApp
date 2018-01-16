@@ -5,7 +5,7 @@ import {Nav, NavItem, Navbar, Badge} from 'react-bootstrap';
 class Menu extends React.Component{
   render(){
     return(
-      <Navbar inverse fixedTop>
+      <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
             <a href="/">React-Bootstrap</a>
