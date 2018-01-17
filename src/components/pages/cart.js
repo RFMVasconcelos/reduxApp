@@ -34,7 +34,7 @@ class Cart extends React.Component{
   constructor(){
     super();
     this.state={
-      showModal:true
+      showModal:false
     }
   }
   open(){
@@ -86,7 +86,7 @@ class Cart extends React.Component{
       )
     }, this)
     return(
-      <Panel bsStyle='success'>
+      <Panel bsStyle='primary'>
         <Panel.Heading>
           <Panel.Title componentClass="h3">
             Cart
@@ -104,7 +104,7 @@ class Cart extends React.Component{
           </Row>
           <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Checkout Cart</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <h6>total $: {this.props.totalAmount}</h6>
