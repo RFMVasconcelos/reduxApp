@@ -18123,7 +18123,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function postBooks(book) {
   return function (dispatch) {
-    _axios2.default.post("/books", book) //http request
+    _axios2.default.post("/api/books", book) //http request
     .then(function (response) {
       dispatch({ type: "POST_BOOK", payload: response.data });
     }).catch(function (err) {
@@ -18139,7 +18139,7 @@ function postBooks(book) {
 
 function deleteBooks(id) {
   return function (dispatch) {
-    _axios2.default.delete("/books/" + id).then(function (response) {
+    _axios2.default.delete("/api/books/" + id).then(function (response) {
       dispatch({ type: "DELETE_BOOK", payload: id });
     }).catch(function (err) {
       dispatch({ type: "DELETE_BOOKS_REJECTED", payload: "there was an error with deleteBooks" });
@@ -18156,7 +18156,7 @@ function updateBooks(book) {
 
 function getBooks(book) {
   return function (dispatch) {
-    _axios2.default.get("/books").then(function (response) {
+    _axios2.default.get("/api/books").then(function (response) {
       dispatch({ type: "GET_BOOKS", payload: response.data });
     }).catch(function (err) {
       dispatch({ type: "GET_BOOKS_REJECTED", payload: "there was an error with getBooks" });
