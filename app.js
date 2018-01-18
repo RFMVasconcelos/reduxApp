@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// APIs
+// APIs ==================================================
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/bookshop');
 var Books = require('./models/books.js');
@@ -87,7 +87,7 @@ app.put('/books/:_id', function(req, res){
   })
 })
 
-// END
+// END ===================================
 
 // copied from server.js
 app.get('*', function(req, res){

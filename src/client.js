@@ -5,17 +5,17 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 // REACT-ROUTER
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-
-
 // REDUX
 import {applyMiddleware, createStore} from 'redux';
 import logger from 'redux-logger'; //for middleware
+// REDUX-THUNK (for api server side connection)
+import thunk from 'redux-thunk';
 
 // IMPORT COMBINED REDUCERS
 import reducers from './reducers/index';
 
 // STEP 1 create the store
-const middleware = applyMiddleware(logger);
+const middleware = applyMiddleware(thunk, logger);
 const store = createStore(reducers, middleware);
 
 import BooksList from './components/pages/booksList';
@@ -42,8 +42,8 @@ render(
 
 
 // IMPORT ACTIONS
-import {addToCart} from './actions/cartActions'
-import {postBooks, deleteBooks, updateBooks} from './actions/booksActions'
+// import {addToCart} from './actions/cartActions'
+// import {postBooks, deleteBooks, updateBooks} from './actions/booksActions'
 
 // STEP 2 create and dispatch actions
 // store.dispatch(postBooks(

@@ -1,19 +1,7 @@
 'use strict'
 
 export function booksReducers(state={
-  books:
-  [{
-    _id: 1,
-    title:'this is the book title',
-    description: 'this is the book description',
-    price: 43
-  },
-  {
-    _id: 2,
-    title:'this is the second book title',
-    description: 'this is the second book description',
-    price: 50
-  }]
+  books:[]
 }, action){
   switch(action.type){
 
@@ -65,7 +53,8 @@ export function booksReducers(state={
       break;
 
       case "GET_BOOKS":
-      return{...state, books:[...state.books]}
+      return{...state, books:[...action.payload]}
+      // return{...state, books:[...state.books]} (WHEN THE DISPLAYED BOOKS WERE THE ONES IN THE APP NOT IN THE DB)
       break;
     }
     return state
