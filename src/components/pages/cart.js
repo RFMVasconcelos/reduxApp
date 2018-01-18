@@ -3,10 +3,14 @@ import React from 'react';
 import {connect} from 'react-redux'; //cart will be a smart component because we need to check the cart in state
 import {bindActionCreators} from 'redux'; //for delete button to work
 import {Modal, Panel, Col, Row, Well, Button, ButtonGroup, Label} from 'react-bootstrap';
-import {deleteCartItem, updateCart} from '../../actions/cartActions';
+import {deleteCartItem, updateCart, getCart} from '../../actions/cartActions';
 
 
 class Cart extends React.Component{
+
+  componentDidMount(){
+    this.props.getCart();
+  }
 
   onDelete(_id){
     // Create a copy of the current cart
@@ -23,11 +27,11 @@ class Cart extends React.Component{
     this.props.deleteCartItem(cartAfterDelete);
   }
   onIncrement(_id){
-    this.props.updateCart(_id, 1);
+    this.props.updateCart(_id, 1, this.props.cart);
   }
   onDecrement(_id, quantity){
     if(quantity > 1){
-      this.props.updateCart(_id, -1);
+      this.props.updateCart(_id, -1, this.props.cart);
     }
   }
   // constructor to decide wether the checout window is open in the begining
@@ -127,7 +131,8 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     deleteCartItem:deleteCartItem,
-    updateCart:updateCart
+    updateCart:updateCart,
+    getCart:getCart
   }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
