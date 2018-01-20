@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {getBooks} from '../../actions/booksActions';
 import {bindActionCreators} from 'redux';
-import {Grid, Col, Row, Button} from 'react-bootstrap';
+import {Carousel, Grid, Col, Row, Button} from 'react-bootstrap';
 
 // import classes
 import BookItem from './bookItem';
@@ -42,6 +42,19 @@ class BooksList extends React.Component{
       // </div>
       <Grid>
         <Row>
+          <Carousel>
+        		<Carousel.Item>
+        			<img width={1000} height={750} alt="1000x750" src="/images/menu1.jpg" />
+        			<Carousel.Caption>
+        				<h3>Welcome to Rui's Library!</h3>
+        			</Carousel.Caption>
+        		</Carousel.Item>
+        		<Carousel.Item>
+        			<img width={1980} height={1317} alt="1980x1317" src="/images/menu2.jpg" />
+        		</Carousel.Item>
+        	</Carousel>
+        </Row>
+        <Row style={{marginTop:'15px'}}>
           <Cart />
         </Row>
         <Row>

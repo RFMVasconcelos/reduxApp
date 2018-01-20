@@ -8,7 +8,7 @@ class Footer extends React.Component{
     return(
       <footer className="footer text-center">
         <div className="container">
-          <p className="footer-text"> This course is not as easy as I thought</p>
+          <p className="footer-text"> This website is the final result of the "Full stack Universal React and Redux, Node js and MongoDB" course</p>
         </div>
       </footer>
     );

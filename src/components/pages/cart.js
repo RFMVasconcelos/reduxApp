@@ -1,8 +1,8 @@
 'use strict'
 import React from 'react';
 import {connect} from 'react-redux'; //cart will be a smart component because we need to check the cart in state
-import {bindActionCreators} from 'redux'; //for delete button to work
 import {Modal, Panel, Col, Row, Well, Button, ButtonGroup, Label} from 'react-bootstrap';
+import {bindActionCreators} from 'redux'; //for delete button to work
 import {deleteCartItem, updateCart, getCart} from '../../actions/cartActions';
 
 
