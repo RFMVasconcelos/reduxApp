@@ -5,7 +5,7 @@ import {MenuItem, InputGroup, DropdownButton, Image, Col, Row, Well, Panel, Form
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux'; // to dispatch actions
 import {findDOMNode} from 'react-dom'; // to allow the saving of typed data on bootstrap
-import {postBooks, deleteBooks, getBooks} from '../../actions/booksActions'; // action we want to dispatch
+import {postBooks, deleteBooks, getBooks, resetButton} from '../../actions/booksActions'; // action we want to dispatch
 import axios from 'axios';
 
 
@@ -22,12 +22,12 @@ class BooksForm extends React.Component{
   componentDidMount(){
     // GET IMAGES FROM API
     axios.get('/api/images')
-      .then(function(response){
-        this.setState({images:response.data});
-        }.bind(this))
-      .catch(function(err){
-        this.setState({images:'error loading image files from server', img:''})
-      }.bind(this))
+    .then(function(response){
+      this.setState({images:response.data});
+    }.bind(this))
+    .catch(function(err){
+      this.setState({images:'error loading image files from server', img:''})
+    }.bind(this))
     // GET BOOKS so they can be chosen for deletion
     this.props.getBooks();
   }
@@ -51,6 +51,16 @@ class BooksForm extends React.Component{
     this.setState({
       img: '/images/' + img
     })
+  }
+
+  resetForm(){
+    // RESET THE BUTTON
+    this.props.resetButton();
+    // RESET FORM
+    findDOMNode(this.refs.title).value = '';
+    findDOMNode(this.refs.description).value = '';
+    findDOMNode(this.refs.price).value = '';
+    this.setState({img:''})
   }
 
   render(){
@@ -109,7 +119,11 @@ class BooksForm extends React.Component{
                   placeholder="Enter Price"
                   ref="price" />
               </FormGroup>
-              <Button onClick={this.handleSubmit.bind(this)} bsStyle="primary"> Save book </Button>
+              <Button
+                onClick={(!this.props.msg)?(this.handleSubmit.bind(this)):(this.resetForm.bind(this))}
+                bsStyle={(!this.props.style)?("primary"):(this.props.style)}>
+                {(!this.props.msg)?("Save Book"):(this.props.msg)}
+              </Button>
             </Panel>
             <Panel style={{marginTop:'25px'}}>
               <FormGroup controlId="formControlSelect">
@@ -129,7 +143,9 @@ class BooksForm extends React.Component{
 }
 function mapStateToProps(state){
   return{
-    books: state.books.books
+    books: state.books.books,
+    msg: state.books.msg,
+    style:state.books.style
   }
 }
 
@@ -137,7 +153,8 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({
     postBooks,
     deleteBooks,
-    getBooks
+    getBooks,
+    resetButton
   }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(BooksForm);

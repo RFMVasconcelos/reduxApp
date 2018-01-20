@@ -48,3 +48,10 @@ export function getBooks(book){
     })
   }
 }
+
+// RESET FORM BUTTON
+export function resetButton(){
+  return{
+    type: "RESET_BUTTON"
+  }
+}

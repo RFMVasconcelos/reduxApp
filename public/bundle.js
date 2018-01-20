@@ -18120,6 +18120,7 @@ exports.postBooks = postBooks;
 exports.deleteBooks = deleteBooks;
 exports.updateBooks = updateBooks;
 exports.getBooks = getBooks;
+exports.resetButton = resetButton;
 
 var _axios = __webpack_require__(125);
 
@@ -18167,6 +18168,13 @@ function getBooks(book) {
     }).catch(function (err) {
       dispatch({ type: "GET_BOOKS_REJECTED", payload: "there was an error with getBooks" });
     });
+  };
+}
+
+// RESET FORM BUTTON
+function resetButton() {
+  return {
+    type: "RESET_BUTTON"
   };
 }
 
@@ -22667,6 +22675,17 @@ var BooksForm = function (_React$Component) {
       });
     }
   }, {
+    key: 'resetForm',
+    value: function resetForm() {
+      // RESET THE BUTTON
+      this.props.resetButton();
+      // RESET FORM
+      (0, _reactDom.findDOMNode)(this.refs.title).value = '';
+      (0, _reactDom.findDOMNode)(this.refs.description).value = '';
+      (0, _reactDom.findDOMNode)(this.refs.price).value = '';
+      this.setState({ img: '' });
+    }
+  }, {
     key: 'render',
     value: function render() {
       //map the list of books to dynamically present them on select deletion
@@ -22763,8 +22782,10 @@ var BooksForm = function (_React$Component) {
               ),
               _react2.default.createElement(
                 _reactBootstrap.Button,
-                { onClick: this.handleSubmit.bind(this), bsStyle: 'primary' },
-                ' Save book '
+                {
+                  onClick: !this.props.msg ? this.handleSubmit.bind(this) : this.resetForm.bind(this),
+                  bsStyle: !this.props.style ? "primary" : this.props.style },
+                !this.props.msg ? "Save Book" : this.props.msg
               )
             ),
             _react2.default.createElement(
@@ -22806,7 +22827,9 @@ var BooksForm = function (_React$Component) {
 
 function mapStateToProps(state) {
   return {
-    books: state.books.books
+    books: state.books.books,
+    msg: state.books.msg,
+    style: state.books.style
   };
 }
 
@@ -22814,7 +22837,8 @@ function mapDispatchToProps(dispatch) {
   return (0, _redux.bindActionCreators)({
     postBooks: _booksActions.postBooks,
     deleteBooks: _booksActions.deleteBooks,
-    getBooks: _booksActions.getBooks
+    getBooks: _booksActions.getBooks,
+    resetButton: _booksActions.resetButton
   }, dispatch);
 }
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(BooksForm);
@@ -38820,7 +38844,15 @@ function booksReducers() {
       //return state;
       //let books = state.concat(action.payload)
       //return books;
-      return { books: [].concat(_toConsumableArray(state.books), _toConsumableArray(action.payload)) };
+      return _extends({}, state, { books: [].concat(_toConsumableArray(state.books), _toConsumableArray(action.payload)), msg: 'Saved! Click to continue', style: 'success' });
+      break;
+
+    case "POST_BOOK_REJECTED":
+      return _extends({}, state, { msg: 'Please, try again', style: 'danger' });
+      break;
+
+    case "RESET_BUTTON":
+      return _extends({}, state, { msg: null, style: 'primary' });
       break;
 
     case "DELETE_BOOK":
